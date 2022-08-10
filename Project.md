@@ -21,3 +21,26 @@ Server B name - `mysql client`
 ```
 ![alt](./Images/Server%20naming.JPG)
 
+- On mysql server Linux Server install MySQL Server software.
+```
+sudo apt install mysql
+```
+![alt](./Images/Install%20Mysql%20on%20Server.JPG)
+- On mysql client Linux Server install MySQL Client software.
+```
+sudo apt install mysql
+```
+![alt](./Images/Install%20Mysql%20on%20client.JPG)
+
+- Use mysql server's local IP address to connect from mysql client. MySQL server uses TCP port 3306 by default, so you will have to open it by creating a new entry in ‘Inbound rules’ in ‘mysql server’ Security Groups. For extra security, do not allow all IP addresses to reach your ‘mysql server’ – allow access only to the specific local IP address of your ‘mysql client’.
+![alt](./Images/Sql%20Secuorty%20group%20port%20addition.JPG)
+
+- You might need to configure MySQL server to allow connections from remote hosts.
+```
+sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf
+```
+Replace ‘127.0.0.1’ to ‘0.0.0.0’
+
+![alt](./Images/sudo%20vi-etc-mysql-mysql.conf.d-mysqld.JPG)
+
+- From mysql client Linux Server connect remotely to mysql server Database Engine without using SSH. You must use the mysql utility to perform this action.
