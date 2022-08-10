@@ -15,3 +15,9 @@ In this case, our Web Server has a role of a "Client" that connects and reads/wr
 
 STEPS
 - Create and configure two Linux-based virtual servers (EC2 instances in AWS).
+```
+Server A name - `mysql server`
+Server B name - `mysql client`
+```
+![alt](./Images/Server%20naming.JPG)
+
