@@ -45,3 +45,6 @@ Replace ‘127.0.0.1’ to ‘0.0.0.0’
 
 - From mysql client Linux Server connect remotely to mysql server Database Engine without using SSH. You must use the mysql utility to perform this action.
 next action will be to link the two Sql server and client.
+ `` mysql -u username -h mysql_server_ip -p``
+ ``sudo ufw allow from remote_ip_address to any port 3306``
+ 
