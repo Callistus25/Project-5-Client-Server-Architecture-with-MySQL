@@ -44,3 +44,4 @@ Replace ‘127.0.0.1’ to ‘0.0.0.0’
 ![alt](./Images/sudo%20vi-etc-mysql-mysql.conf.d-mysqld.JPG)
 
 - From mysql client Linux Server connect remotely to mysql server Database Engine without using SSH. You must use the mysql utility to perform this action.
+next action will be to link the two Sql server and client.
