@@ -54,3 +54,6 @@ next action will be to link the two Sql server and client.
  ![alt](./Images/database%20connection%20success.JPG)
 
 Connection success!
+```
+sudo apt upgrade
+```
