@@ -32,10 +32,11 @@ sudo apt install mysql-client
 ```
 ![alt](./Images/Install%20Mysql%20on%20client.JPG)
 
-- Need to use mysql server's local IP address to connect from mysql client but need to configure the connection port. MySQL server uses TCP port 3306 by default, so you will have to open it by creating a new entry in ‘Inbound rules’ in ‘mysql server’ Security Groups. For extra security, do not allow all IP addresses to reach your ‘mysql server’ – allow access only to the specific local IP address of your ‘mysql client’.
+- Need to use mysql server's local IP address to connect from mysql client but need to configure the connection port. MySQL server uses TCP port 3306 by default, have to open it by creating a new entry in ‘Inbound rules’ in ‘mysql server’ Security Groups. For extra security, do not allow all IP addresses to reach your ‘mysql server’ – allow access only to the specific local IP address of your ‘mysql client’.
+
 ![alt](./Images/Sql%20Secuorty%20group%20port%20addition.JPG)
 
-- You might need to configure MySQL server to allow connections from remote hosts.
+- You might need to configure mySQL server to allow connections from remote hosts.
 ```
 sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf
 ```
@@ -50,27 +51,29 @@ sudo systemctl restart mysql
 ```
 ![alt](./Images/Restart%20Mysql%20server.JPG)
 
-- From mysql server, login to mysql and create a client user and database for the network to ecxess. Use the command below:
+- From mysql server, login to mysql and create a remote user and database for the client user to access. Use the commands below:
 ```
 sudo mysql
 ```
-Create remote user
+- Create remote user
 ```
 CREATE USER '<remoteusername>'@'%' IDENTIFIED WITH mysql_native_password BY '<password>';
 ```
-where <remoteusername> and <password> in the above scenario need to be replaced. In my case, sample like below;
+where *< remoteusername>* and *< password>* in the above scenario need to be replaced. In my case, sample is like below;
 ```
 CREATE USER 'callistus'@'%' IDENTIFIED WITH mysql_native_password BY 'Fearless';
 ```
-- Create Database for the remote user.
+![alt](./Images/create%20user%20success.JPG)
+
+- Create a new database for the remote user using the below command;
 ```
 CREATE DATABASE Test_data;
 ```
-where Test_data is the name of the database.
+where Test_data is the name of the sample database.
 
 ![alt](./Images/create%20database.JPG)
 
-- Grant privilegde of the created database to the remote user using the below command;
+- Grant privilege of all the database to the remote user using the below command;
 ```
 GRANT ALL ON <databasename>.* TO '<remoteusername>'@'%' WITH GRANT OPTION;
 ```
@@ -83,14 +86,14 @@ GRANT ALL ON Test_data.* TO 'callistus'@'%' WITH GRANT OPTION;
 
 - Flush the privileges.
 ```
-mysql> FLUSH PRIVILEGDES;
+mysql> FLUSH PRIVILEGES;
 ```
 ![alt](./Images/Flush%20privileges.JPG)
+
 Then exit mysql server.
 
 - From *mysql client*,  connect remotely to mysql server Database Engine without using SSH. You must use the *mysql* utility to perform this action.
-next action will be to link the two Sql server and client.
-Login to the mysql server from mysqlclient using the below command and enter previously set password;
+Login to the *mysql server* from *mysql client* using the below command and the previously set password;
 
 ```
 sudo mysql -u <remoteusername> -h <mysql_server_IP> -p
@@ -98,13 +101,11 @@ sudo mysql -u <remoteusername> -h <mysql_server_IP> -p
 ![alt](./Images/Login%20from%20client%20to%20server.JPG)
 
 
+- Check and confirm that you have successfully connected to MySQL server and can perform SQL queries. Run the below command to show the existing databases.
 
-- Check and confirm that you have successfully connected to a remote MySQL server and can perform SQL queries:
-
- `` mysql -u username -h mysql_server_ip -p``
- ``sudo ufw allow from remote_ip_address to any port 3306``
-
- ![alt](./Images/database%20connection%20success.JPG)
+ `` Show databases;
+ ``
+  ![alt](./Images/database%20connection%20success.JPG)
 
 Connection success!
 
