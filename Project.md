@@ -21,18 +21,18 @@ Server B name - `mysql client`
 ```
 ![alt](./Images/Server%20naming.JPG)
 
-- On mysql server Linux Server install MySQL Server software.
+- On mysql server EC2, install MySQL Server software.
 ```
-sudo apt install mysql
+sudo apt install mysql-server
 ```
 ![alt](./Images/Install%20Mysql%20on%20Server.JPG)
 - On mysql client EC2, install MySQL Client software.
 ```
-sudo apt install mysql
+sudo apt install mysql-client
 ```
 ![alt](./Images/Install%20Mysql%20on%20client.JPG)
 
-- Use mysql server's local IP address to connect from mysql client. MySQL server uses TCP port 3306 by default, so you will have to open it by creating a new entry in ‘Inbound rules’ in ‘mysql server’ Security Groups. For extra security, do not allow all IP addresses to reach your ‘mysql server’ – allow access only to the specific local IP address of your ‘mysql client’.
+- Need to use mysql server's local IP address to connect from mysql client but need to configure the connection port. MySQL server uses TCP port 3306 by default, so you will have to open it by creating a new entry in ‘Inbound rules’ in ‘mysql server’ Security Groups. For extra security, do not allow all IP addresses to reach your ‘mysql server’ – allow access only to the specific local IP address of your ‘mysql client’.
 ![alt](./Images/Sql%20Secuorty%20group%20port%20addition.JPG)
 
 - You might need to configure MySQL server to allow connections from remote hosts.
