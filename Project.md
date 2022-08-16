@@ -26,7 +26,7 @@ Server B name - `mysql client`
 sudo apt install mysql
 ```
 ![alt](./Images/Install%20Mysql%20on%20Server.JPG)
-- On mysql client Linux Server install MySQL Client software.
+- On mysql client EC2, install MySQL Client software.
 ```
 sudo apt install mysql
 ```
@@ -43,7 +43,39 @@ Replace ‘127.0.0.1’ to ‘0.0.0.0’
 
 ![alt](./Images/sudo%20vi-etc-mysql-mysql.conf.d-mysqld.JPG)
 
-- From mysql client Linux Server connect remotely to mysql server Database Engine without using SSH. You must use the mysql utility to perform this action.
+- Restart mysql server afterwards with below command;
+
+```
+sudo systemctl restart mysql
+```
+![alt](./Images/Restart%20Mysql%20server.JPG)
+
+- From mysql server, login to mysql and create a client user and database for the network to ecxess. Use the command below:
+```
+sudo mysql
+```
+Create remote user
+```
+CREATE USER '<remoteusername>'@'%' IDENTIFIED WITH mysql_native_password BY '<password>';
+```
+where <remoteusername> and <password> in the above scenario need to be replaced. In my case, sample like below;
+```
+CREATE USER 'callistus'@'%' IDENTIFIED WITH mysql_native_password BY 'Fearless';
+```
+- Create Database for the remote user.
+```
+CREATE DATABASE Test_data;
+```
+where Test_data is the name of the database.
+
+![alt](./Images/create%20database.JPG)
+
+- GRant Provilegse of the file to the remote user using the below command;
+```
+GRANT ALL ON <databasename>.* TO '<remoteusername>'@'%' WITH GRANT OPTION;
+```
+
+- From *mysql client*,  connect remotely to mysql server Database Engine without using SSH. You must use the *mysql* utility to perform this action.
 next action will be to link the two Sql server and client.
 
 - Check that you have successfully connected to a remote MySQL server and can perform SQL queries:
