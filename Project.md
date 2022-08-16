@@ -70,15 +70,36 @@ where Test_data is the name of the database.
 
 ![alt](./Images/create%20database.JPG)
 
-- GRant Provilegse of the file to the remote user using the below command;
+- Grant privilegde of the created database to the remote user using the below command;
 ```
 GRANT ALL ON <databasename>.* TO '<remoteusername>'@'%' WITH GRANT OPTION;
 ```
+In my case, i used ;
+
+```
+GRANT ALL ON Test_data.* TO 'callistus'@'%' WITH GRANT OPTION;
+```
+![alt](./Images/Database%20access%20granted%20to%20remoteuser.JPG)
+
+- Flush the privileges.
+```
+mysql> FLUSH PRIVILEGDES;
+```
+![alt](./Images/Flush%20privileges.JPG)
+Then exit mysql server.
 
 - From *mysql client*,  connect remotely to mysql server Database Engine without using SSH. You must use the *mysql* utility to perform this action.
 next action will be to link the two Sql server and client.
+Login to the mysql server from mysqlclient using the below command and enter previously set password;
 
-- Check that you have successfully connected to a remote MySQL server and can perform SQL queries:
+```
+sudo mysql -u <remoteusername> -h <mysql_server_IP> -p
+```
+![alt](./Images/Login%20from%20client%20to%20server.JPG)
+
+
+
+- Check and confirm that you have successfully connected to a remote MySQL server and can perform SQL queries:
 
  `` mysql -u username -h mysql_server_ip -p``
  ``sudo ufw allow from remote_ip_address to any port 3306``
